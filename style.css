@@ -1,0 +1,103 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 16px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#outputText {
+  background-color: white;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  min-height: 50px;
+  border: 1px solid #ddd;
+}
+
+#history {
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.history-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.original {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.translated {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.timestamp {
+  color: #999;
+  font-size: 0.8em;
+  text-align: right;
+}
+
+/* スクロールバーのスタイル */
+#history::-webkit-scrollbar {
+  width: 8px;
+}
+
+#history::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#history::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+#history::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  

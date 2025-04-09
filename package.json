@@ -1,0 +1,20 @@
+{
+  "name": "chat-translator",
+  "version": "1.0.0",
+  "description": "リアルタイムチャット翻訳ツール",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.9"
+  },
+  "devDependencies": {
+    "electron": "^28.1.0"
+  }
+}
