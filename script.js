@@ -3,6 +3,20 @@ const output = document.getElementById('outputText');
 const history = document.getElementById('history');
 const translateBtn = document.getElementById('translateBtn');
 
+// サーバーの状態を確認
+async function checkServerStatus() {
+  try {
+    const response = await fetch('http://localhost:3000/health');
+    if (!response.ok) {
+      throw new Error(`サーバーエラー: ${response.status}`);
+    }
+    return true;
+  } catch (err) {
+    console.error('サーバー接続エラー:', err);
+    return false;
+  }
+}
+
 // 翻訳履歴を保存する配列
 let translationHistory = [];
 
@@ -11,6 +25,14 @@ async function translateText(text) {
   if (!text.trim()) return;
 
   try {
+    // サーバーの状態を確認
+    const isServerRunning = await checkServerStatus();
+    if (!isServerRunning) {
+      throw new Error('サーバーに接続できません。アプリを再起動してください。');
+    }
+
+    output.textContent = "翻訳中...";
+    
     const response = await fetch("http://localhost:3000/translate", {
       method: "POST",
       headers: {
@@ -24,7 +46,17 @@ async function translateText(text) {
       })
     });
 
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`HTTPエラー: ${response.status}\n${errorData.details || errorData.error || '不明なエラーが発生しました'}`);
+    }
+
     const data = await response.json();
+    
+    if (data.error) {
+      throw new Error(data.details || data.error);
+    }
+
     if (data.translatedText) {
       const translated = data.translatedText;
       output.textContent = translated;
@@ -40,11 +72,11 @@ async function translateText(text) {
       updateHistoryDisplay();
       input.value = '';
     } else {
-      output.textContent = "⚠️ 翻訳結果が取得できませんでした。";
+      throw new Error("翻訳結果が取得できませんでした");
     }
   } catch (err) {
-    output.textContent = "⚠️ 翻訳に失敗しました";
-    console.error(err);
+    console.error("翻訳エラー:", err);
+    output.textContent = `⚠️ ${err.message}`;
   }
 }
 
